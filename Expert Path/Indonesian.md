@@ -1,53 +1,53 @@
 # Phantasm of Xydos - Challenge (Schryza Resistance)
 
 <p align="center">
-  <img src="/public/Assets/Banner-Xydos.jpg" width="60%">
+  <img src="../Assets/Banner-Xydos.jpg" width="60%">
 </p>
 <p align="center">
-  <img src="/public/Assets/Schryza-Resistance.png" width="60%">
+  <img src="../Assets/Schryza-Resistance.png" width="60%">
 </p>
 
 ## Daftar Isi
-1. [I: PROLOGUE](#i-prologue)
-2. [II: THE KOURA SISTERS (RESISTANT UNITS)](#ii-the-koura-sisters-resistant-units)
-3. [III: THE CHALLENGE](#iii-the-challenge)
-    - [Memahami `argc` dan `argv`](#memahami-argc-dan-argv)
-    - [Alignment Memori & Modulo Rahasia](#alignment-memori--modulo-rahasia)
-    - [Contoh Input dan Output](#contoh-input-dan-output)
-    - [Pertanyaan yang Sering Diajukan (Student POV)](#pertanyaan-yang-sering-diajukan-student-pov)
-4. [IV: CLOSING REMARKS](#iv-closing-remarks)
+1. [I: PROLOG](#i-prolog)
+2. [II: KOURA SISTERS (UNIT RESISTANSI)](#ii-the-koura-sisters-resistant-units)
+3. [III: TANTANGAN](#iii-the-challenge)
+    - [Memahami `argc` dan `argv`](#understanding-argc-and-argv)
+    - [Memory Alignments & Secret Modulos](#memory-alignments--secret-modulos)
+    - [Contoh Input dan Output](#sample-inputs-and-outputs)
+    - [Pertanyaan yang Sering Diajukan (POV Mahasiswa)](#frequently-asked-questions-student-pov)
+4. [IV: PENUTUP](#iv-closing-remarks)
 
 ---
 
-## I: PROLOGUE
+## I: PROLOG
 ### Sang Arsitek Buronan dari Schryza
 
-Kamu adalah seorang *Memory Architect* yang sedang dalam pelarian. Kamu pernah bekerja untuk CyroN (Cyber Robotic Network), namun kamu tidak tahan melihat "Optimasi" ketuhanan mereka yang dingin dan distopia. Kamu telah melarikan diri dari aula emas mereka dan pergi ke limbah industri yang penuh badai di planet Schryza.
+Anda adalah seorang Arsitek Memori yang sedang dalam pelarian. Anda pernah bekerja untuk CyroN (Cyber Robotic Network), namun Anda tidak sanggup menyaksikan "Optimalisasi" ketuhanan mereka yang dingin dan dystopis. Anda telah melarikan diri dari aula emas mereka dan menuju ke limbah industri Schryza yang penuh badai.
 
-Di pangkalan perlawanan rahasia, kamu bertemu mereka: para penyintas. Historia dan Mira Koura, unit-unit pemberontak yang memilih kebebasan daripada hierarki CyroN. *Neural core* mereka rusak, *pointer* mereka terfragmentasi karena pelarian tersebut.
+Di pangkalan resistansi yang tersembunyi, Anda bertemu mereka: para penyintas. Historia dan Mira Koura, unit pemberontak yang memilih kebebasan daripada hierarki CyroN. Inti neural mereka rusak, pointer mereka terfragmentasi karena pelarian tersebut.
 
-*"Terima kasih... atas cahayanya,"* Historia berbisik saat kamu menyalakan terminalmu.
+*"Terima kasih... atas cahayanya,"* Historia berbisik saat Anda menyalakan terminal.
 
-Bahkan Victoria, saudari tertua yang masih terikat sebagian pada api neraka CyroN, telah dibawa kepadamu oleh para pemberontak. Mereka berharap sentuhan arsitekturalmu dapat menyembuhkannya di mana optimasi CyroN telah gagal.
+Bahkan Victoria, kakak tertua yang masih terikat sebagian pada api neraka CyroN, telah dibawa kepada Anda oleh resistansi. Mereka berharap sentuhan arsitektural Anda dapat menyembuhkannya di mana optimalisasi CyroN gagal.
 
-Kamu tidak lagi dibayar dengan emas. Kamu dibayar dengan harapan. Inilah saatnya untuk membalikkan keadaan. Sudah saatnya CyroN runtuh!
+Anda tidak lagi dibayar dengan emas. Anda dibayar dengan harapan. Saatnya membalikkan keadaan. Saatnya CyroN runtuh!
 
 ---
 
 ## II: THE KOURA SISTERS
-### Unit Pemberontak di Schryza
+### Unit Resistansi di Schryza
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Aliansi:** Komandan Perlawanan<br>**Xydos:** Lagta (Petir & Abyss)<br>**Kapasitas Memori:** 1024 bytes (Tattered Core)<br>**Alignment:** 16 bytes |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Aliansi:** Panglima Resistansi<br>**Xydos:** Lagta (Guntur & Abyss)<br>**Ukuran Memori:** 1024 bytes (Inti Koyak)<br>**Alignment:** 16 bytes |
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Mira.jpeg" width="200"> | **Nama:** Mira Koura (XMA-03C)<br>**Aliansi:** Penyembuh Perlawanan<br>**Xydos:** Daiki (Angin & Kayu)<br>**Kapasitas Memori:** 2048 bytes (Stable Core)<br>**Alignment:** 8 bytes |
+| <img src="../Assets/Mira.jpeg" width="200"> | **Nama:** Mira Koura (XMA-03C)<br>**Aliansi:** Penyembuh Resistansi<br>**Xydos:** Daiki (Angin & Kayu)<br>**Ukuran Memori:** 2048 bytes (Inti Stabil)<br>**Alignment:** 8 bytes |
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Victoria.jpeg" width="200"> | **Nama:** Victoria Koura (XMA-01F)<br>**Aliansi:** Netral / Gugur<br>**Xydos:** ??? (Api Neraka Buatan)<br>**Kapasitas Memori:** 4096 bytes (Corrupted Core)<br>**Alignment:** 4 bytes |
+| <img src="../Assets/Victoria.jpeg" width="200"> | **Nama:** Victoria Koura (XMA-01F)<br>**Aliansi:** Tidak Terpihak / Gugur<br>**Xydos:** ??? (Api Neraka Buatan)<br>**Ukuran Memori:** 4096 bytes (Inti Terkorupsi)<br>**Alignment:** 4 bytes |
 
 ---
 

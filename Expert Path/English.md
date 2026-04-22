@@ -1,10 +1,10 @@
 # Phantasm of Xydos - Challenge (Schryza Resistance)
 
 <p align="center">
-  <img src="/public/Assets/Banner-Xydos.jpg" width="60%">
+  <img src="../Assets/Banner-Xydos.jpg" width="60%">
 </p>
 <p align="center">
-  <img src="/public/Assets/Schryza-Resistance.png" width="60%">
+  <img src="../Assets/Schryza-Resistance.png" width="60%">
 </p>
 
 ## Table of Contents
@@ -39,15 +39,15 @@ You aren't being paid in gold anymore. You are being paid in hope. It's time to 
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Historia.jpeg" width="200"> | **Name:** Historia Koura (XMA-02A)<br>**Alliance:** Resistance Commander<br>**Xydos:** Lagta (Thunder & Abyss)<br>**Memory Size:** 1024 bytes (Tattered Core)<br>**Alignment:** 16 bytes |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Name:** Historia Koura (XMA-02A)<br>**Alliance:** Resistance Commander<br>**Xydos:** Lagta (Thunder & Abyss)<br>**Memory Size:** 1024 bytes (Tattered Core)<br>**Alignment:** 16 bytes |
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Mira.jpeg" width="200"> | **Name:** Mira Koura (XMA-03C)<br>**Alliance:** Resistance Healer<br>**Xydos:** Daiki (Wind & Wood)<br>**Memory Size:** 2048 bytes (Stable Core)<br>**Alignment:** 8 bytes |
+| <img src="../Assets/Mira.jpeg" width="200"> | **Name:** Mira Koura (XMA-03C)<br>**Alliance:** Resistance Healer<br>**Xydos:** Daiki (Wind & Wood)<br>**Memory Size:** 2048 bytes (Stable Core)<br>**Alignment:** 8 bytes |
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Victoria.jpeg" width="200"> | **Name:** Victoria Koura (XMA-01F)<br>**Alliance:** Unaligned / Fallen<br>**Xydos:** ??? (Artificial Hellfire)<br>**Memory Size:** 4096 bytes (Corrupted Core)<br>**Alignment:** 4 bytes |
+| <img src="../Assets/Victoria.jpeg" width="200"> | **Name:** Victoria Koura (XMA-01F)<br>**Alliance:** Unaligned / Fallen<br>**Xydos:** ??? (Artificial Hellfire)<br>**Memory Size:** 4096 bytes (Corrupted Core)<br>**Alignment:** 4 bytes |
 
 ---
 

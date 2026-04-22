@@ -2,7 +2,7 @@
 ## Phantasm of Xydos: Andromeda I
 
 <p align="center">
-  <img src="/public/Assets/Banner-Xydos.jpg" width="80%">
+  <img src="Assets/Banner-Xydos.jpg" width="80%">
 </p>
 
 Welcome to the official repository for **Algorithms & Programming Module 6**. This module focuses on the most powerful (and dangerous) aspect of C++: **Pointers and Dynamic Memory Management**.
@@ -60,7 +60,7 @@ public/
 
 The Andromeda galaxy is failing. As **CyroN** (Cyber Robotic Network) attempts to industrialize the gods, the "Historia Resistance" fights for a future based on free will. Whether you choose to optimize order or restore freedom, your code will decide the fate of the **Koura Sisters**.
 
-For the full architectural history of the galaxy, read the [FULL_LORE.md](file:///c:/Users/nyoma/OneDrive/Dokumen/Alpro-Modul-6/public/FULL_LORE.md).
+For the full architectural history of the galaxy, read the [FULL_LORE.md](FULL_LORE.md).
 
 ---
 

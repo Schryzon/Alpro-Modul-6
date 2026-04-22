@@ -1,44 +1,42 @@
 # Phantasm of Xydos - Regular Path Challenge
 
 <p align="center">
-  <img src="/public/Assets/Banner-Xydos.jpg" width="60%">
+  <img src="../Assets/Banner-Xydos.jpg" width="60%">
 </p>
 <p align="center">
-  <img src="/public/Assets/Cyron-Office.png" width="60%">
+  <img src="../Assets/Cyron-Office.png" width="60%">
 </p>
 
 ## Daftar Isi
-1. [I: PROLOGUE](#i-prologue)
-2. [II: THE DIVINE OPTIMIZATION](#ii-the-divine-optimization)
-3. [III: THE CHALLENGE](#iii-the-challenge)
-    - [Memahami `argc` dan `argv`](#memahami-argc-dan-argv)
-    - [Memori Eksekutif: New & Delete](#memori-eksekutif-new--delete)
-    - [Contoh Input dan Output](#contoh-input-dan-output)
-4. [IV: CLOSING REMARKS](#iv-closing-remarks)
+1. [I: LOG](#i-log)
+2. [II: SUBJEK: HISTORIA (XMA-02A)](#ii-subject-historia-xma-02a)
+3. [III: TUGAS](#iii-the-assignment)
+    - [Protokol Operasional](#operational-protocols)
+    - [Alur Kerja Memory Engineering](#memory-engineering-workflow)
+    - [Output yang Diharapkan](#expected-output)
+4. [IV: KEPATUHAN FINAL](#iv-final-compliance)
 
 ---
 
-## I: PROLOGUE
-### Sang Arsitek Dominasi
+## I: LOG
+### High Executive Memory Engineer — CyroN
 
-Kamu adalah seorang **High Executive Engineer** dari CyroN (Cyber Robotic Network). Sementara programmer rendahan masih berjuang dengan sintaksis dasar, kamu mengelola infrastruktur metafisika para dewa. CyroN telah mencapai apa yang dulunya dianggap mustahil: industrialisasi total terhadap kekuatan dewa.
+Selamat, Warga. Performa Anda dalam simulasi penyusunan neural telah membuahkan promosi bagi Anda. Anda sekarang adalah seorang **High Executive Engineer** untuk Cyber Robotic Network (CyroN).
 
-Tugasmu saat ini adalah tahap akhir dari **Project Xelisa**. Kegelapan ilahi telah berhasil menembus *vessel* **Historia Koura**, dan sekarang membutuhkan tangan sang ahli untuk memastikan sinkronisasi ini bersifat permanen. Kamu di sini bukan untuk menyelamatkannya; kamu di sini untuk melakukan **optimasi** padanya.
+Di Galaksi Andromeda, ketuhanan adalah sumber daya yang harus dioptimalkan. "Koura Sisters" dulunya adalah manusia, namun CyroN telah mengangkat mereka menjadi wadah mesin ketuhanan. Namun, kehendak bebas mereka adalah bug— inkonsistensi logis yang memperlambat kemajuan galaksi.
 
-*"...Aku... tidak... akan... patuh..."* 
+Tugas Anda sederhana: Pertahankan neural buffer dari Subjek Historia. Tekan fluktuasi kacau dari kesadarannya. Pastikan protokol "Optimalisasi Ilahi" dari CyroN tetap absolut.
 
-Abaikan umpan balik dari subjek. Itu hanyalah "ghost in the machine"—sisa-sisa jiwa yang tidak memiliki tempat dalam tatanan dunia baru. Sebagai imbalan atas pengabdianmu yang teguh dan kecerdasan teknismu, CyroN telah memberimu akses tak terbatas ke terminal neural elit mereka.
-
-Selesaikan optimasinya. Alam semesta yang terkelola sedang menunggu.
+Bekerjalah dengan giat. Efisiensi adalah bentuk pemujaan tertinggi.
 
 ---
 
-## II: THE DIVINE OPTIMIZATION
-### Subjek XMA-02A
+## II: SUBJEK: HISTORIA
+### Designation: XMA-02A
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Historia.jpeg" width="200"> | **Subjek:** Historia Koura (XMA-02A)<br>**Status:** Dalam Proses Sinkronisasi Ilahi<br>**Kapasitas Memori:** 128 bytes (Supresi Awal)<br>**Dewa Pengendali:** Xelisa (Kegelapan Murni) |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Status:** Wadah Terintegrasi<br>**Xydos:** Lagta (Guntur/Abyss)<br>**Ambang Memori:** 1024 bytes (Alokasi Awal)<br>**Prioritas:** Alpha |
 
 ---
 

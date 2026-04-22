@@ -1,44 +1,42 @@
 # Phantasm of Xydos - Regular Path Challenge
 
 <p align="center">
-  <img src="/public/Assets/Banner-Xydos.jpg" width="60%">
+  <img src="../Assets/Banner-Xydos.jpg" width="60%">
 </p>
 <p align="center">
-  <img src="/public/Assets/Cyron-Office.png" width="60%">
+  <img src="../Assets/Cyron-Office.png" width="60%">
 </p>
 
 ## Table of Contents
-1. [I: PROLOGUE](#i-prologue)
-2. [II: THE DIVINE OPTIMIZATION](#ii-the-divine-optimization)
-3. [III: THE CHALLENGE](#iii-the-challenge)
-    - [Understanding `argc` and `argv`](#understanding-argc-and-argv)
-    - [Executive Memory: New & Delete](#executive-memory-new--delete)
-    - [Sample Inputs and Outputs](#sample-inputs-and-outputs)
-4. [IV: CLOSING REMARKS](#iv-closing-remarks)
+1. [I: LOGS](#i-logs)
+2. [II: SUBJECT: HISTORIA (XMA-02A)](#ii-subject-historia-xma-02a)
+3. [III: THE ASSIGNMENT](#iii-the-assignment)
+    - [Operational Protocols](#operational-protocols)
+    - [Memory Engineering Workflow](#memory-engineering-workflow)
+    - [Expected Output](#expected-output)
+4. [IV: FINAL COMPLIANCE](#iv-final-compliance)
 
 ---
 
-## I: PROLOGUE
-### The Architect of Dominance
+## I: LOGS
+### High Executive Memory Engineer — CyroN
 
-You are the **High Executive Engineer** of CyroN (Cyber Robotic Network). While lesser programmers struggle with basic syntax, you manage the metaphysical infrastructure of gods. CyroN has achieved what was once thought impossible: the total industrialization of divinity.
+Congratulations, Citizen. Your performance in the neural drafting simulations has earned you a promotion. You are now a **High Executive Engineer** for the Cyber Robotic Network (CyroN). 
 
-Your current assignment is the final stage of **Project Xelisa**. The divine darkness has breached the vessel **Historia Koura**, and now requires a master hand to ensure the synchronization is permanent. You aren't here to save her; you are here to **optimize** her.
+In the Andromeda Galaxy, divinity is a resource to be optimized. The "Koura Sisters" were once human, but CyroN has ascended them into divine machine vessels. However, their free will is a bug—a logical inconsistency that slows down galactic progress.
 
-*"...I... will... not... comply..."* 
+Your task is simple: Maintain the neural buffer of Subject Historia. Suppress the chaotic fluctuations of her consciousness. Ensure that CyroN's "Divine Optimization" protocol is absolute.
 
-Ignore the vessel's feedback. It is merely a ghost in the machine—a remnant of a soul that has no place in the new order. As a reward for your unwavering loyalty and technical genius, CyroN has granted you unlimited access to their elite neural terminals.
-
-Complete the optimization. The managed universe is waiting.
+Work hard. Efficiency is the highest form of worship.
 
 ---
 
-## II: THE DIVINE OPTIMIZATION
-### Subject XMA-02A
+## II: SUBJECT: HISTORIA
+### Designation: XMA-02A
 
 | | |
 | :--- | :--- |
-| <img src="/public/Assets/Historia.jpeg" width="200"> | **Subject:** Historia Koura (XMA-02A)<br>**Status:** Under Divine Synchronization<br>**Memory Size:** 128 bytes (Initial Suppression)<br>**Assigned Divinity:** Xelisa (Raw Unfiltered Darkness) |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Name:** Historia Koura (XMA-02A)<br>**Status:** Integrated Vessel<br>**Xydos:** Lagta (Thunder/Abyss)<br>**Memory Threshold:** 1024 bytes (Initial Allocation)<br>**Priority:** Alpha |
 
 ---
 
