@@ -7,27 +7,41 @@
   <img src="../Assets/Cyron-Office.png" width="60%">
 </p>
 
+<br>
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=dytSRzsONNI">
+    <img src="https://img.shields.io/badge/🎧_PUTAR_TEMA_EKSEKUTIF_CYRON-00509E?style=for-the-badge&logo=youtube&logoColor=white" alt="Play BGM">
+  </a>
+  <br><br>
+  <a href="../Story/Indonesian_STORY.md">
+    <img src="https://img.shields.io/badge/📖_UNGKAP_CERITA_LENGKAP_XYDOS-5A228B?style=for-the-badge&logo=readme&logoColor=white" alt="Baca Lore">
+  </a><br>
+  <i>(Sangat disarankan untuk dibaca sebelum mulai mengerjakan!)</i>
+</p>
+<br>
+
 ## Daftar Isi
-1. [I: LOG](#i-log)
+1. [I: LOGS](#i-logs)
 2. [II: SUBJEK: HISTORIA (XMA-02A)](#ii-subject-historia-xma-02a)
-3. [III: TUGAS](#iii-the-assignment)
-    - [Protokol Operasional](#operational-protocols)
-    - [Alur Kerja Memory Engineering](#memory-engineering-workflow)
-    - [Output yang Diharapkan](#expected-output)
-4. [IV: KEPATUHAN FINAL](#iv-final-compliance)
+3. [III: THE CHALLENGE](#iii-the-challenge)
+    - [Protokol Operasional](#operational-protocols-program-features)
+    - [Memahami `argc` dan `argv`](#understanding-argc-and-argv)
+    - [Memori Eksekutif: New & Delete](#executive-memory-new--delete)
+    - [Contoh Input dan Output](#sample-inputs-and-outputs)
+4. [IV: CLOSING REMARKS](#iv-closing-remarks)
 
 ---
 
-## I: LOG
+## I: LOGS
 ### High Executive Memory Engineer — CyroN
 
-Selamat, Warga. Performa Anda dalam simulasi penyusunan neural telah membuahkan promosi bagi Anda. Anda sekarang adalah seorang **High Executive Engineer** untuk Cyber Robotic Network (CyroN).
+Selamat, Warga. Performa kamu dalam simulasi *neural network* sangat memuaskan, dan kamu baru saja dipromosikan. Sekarang, kamu resmi menjabat sebagai **High Executive Engineer** untuk Cyber Robotic Network (CyroN).
 
-Di Galaksi Andromeda, ketuhanan adalah sumber daya yang harus dioptimalkan. "Koura Sisters" dulunya adalah manusia, namun CyroN telah mengangkat mereka menjadi wadah mesin ketuhanan. Namun, kehendak bebas mereka adalah bug— inkonsistensi logis yang memperlambat kemajuan galaksi.
+Di Galaksi Andromeda, kekuatan dewa adalah sumber daya yang harus dimaksimalkan. "Koura Sisters" sebelumnya adalah manusia biasa, namun CyroN telah mengubah mereka menjadi wadah (*vessel*) bagi mesin-mesin dewa ini. Sayangnya, kehendak bebas (*free will*) mereka dianggap sebagai sebuah *bug*—sebuah inkonsistensi logika yang menghambat kemajuan galaksi.
 
-Tugas Anda sederhana: Pertahankan neural buffer dari Subjek Historia. Tekan fluktuasi kacau dari kesadarannya. Pastikan protokol "Optimalisasi Ilahi" dari CyroN tetap absolut.
+Tugasmu cukup sederhana: Pertahankan *neural buffer* dari Subjek Historia. Redam seluruh fluktuasi kacau dari kesadarannya. Pastikan protokol "Optimalisasi Kedewaan" milik CyroN berjalan absolut tanpa cela.
 
-Bekerjalah dengan giat. Efisiensi adalah bentuk pemujaan tertinggi.
+Bekerjalah dengan efisien, karena efisiensi adalah bentuk kesetiaan tertinggi.
 
 ---
 
@@ -36,52 +50,52 @@ Bekerjalah dengan giat. Efisiensi adalah bentuk pemujaan tertinggi.
 
 | | |
 | :--- | :--- |
-| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Status:** Wadah Terintegrasi<br>**Xydos:** Lagta (Guntur/Abyss)<br>**Ambang Memori:** 1024 bytes (Alokasi Awal)<br>**Prioritas:** Alpha |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Status:** Vessel Terintegrasi<br>**Xydos:** Lagta (Guntur/Abyss)<br>**Batas Memori:** 128 bytes (Alokasi Awal)<br>**Prioritas:** Alpha |
 
 ---
 
 ## III: THE CHALLENGE
 
-Kamu akan mengoperasikan "CyroN Divine Interface" untuk mengelola memori Historia dan memastikan manifestasi penuh Xelisa.
+Tugas utamamu adalah mengoperasikan "CyroN Divine Interface" untuk mengatur memori Historia dan memastikan manifestasi Xelisa berjalan lancar.
 
 ### PROTOKOL OPERASIONAL (Fitur Program)
-Untuk memastikan tujuan Dewan Pengawas tercapai tanpa kesalahan, ikuti spesifikasi teknis untuk setiap fungsi terminal berikut:
+Agar target Dewan Pengawas (*Board of Directors*) tercapai tanpa *error*, ikuti spesifikasi teknis dari setiap fungsi terminal berikut:
 
 #### 1. View Neural Map (Status)
-*   **Kemampuan**: Memberikan visualisasi real-time dari heap memory subjek.
-*   **Logika**: Menghitung **Persentase Stabilitas** berdasarkan seberapa banyak buffer yang terisi.
-*   **Visibilitas**: Menampilkan tipe, offset, alamat fisik, dan nilai dari setiap *neural thread* yang aktif.
+*   **Fungsi**: Menampilkan visualisasi *real-time* dari *heap memory* subjek.
+*   **Logika**: Menghitung **Persentase Stabilitas** berdasarkan seberapa penuh *buffer* yang terisi.
+*   **Output**: Menunjukkan tipe, *offset*, *physical address*, dan *value* dari setiap *neural thread* yang sedang aktif.
 
 #### 2. Inject Neural Thread (Add)
-*   **Kemampuan**: Mengalokasikan blok memori baru untuk menekan vessel.
-*   **Willpower Pulse (`char*`)**: Menyimpan mantra teks mentah.
+*   **Fungsi**: Mengalokasikan blok memori baru untuk menekan kesadaran *vessel*.
+*   **Willpower Pulse (`char*`)**: Menyimpan teks mantra mentah.
 *   **Thunder Discharge (`int`)**: Menyimpan tingkat energi numerik (4 byte).
-*   **Batasan**: Injeksi akan gagal jika `cursor` melebihi `buffer_limit`. Tidak ada *alignment* memori yang diperlukan di Regular Path—hanya alokasi mentah yang murni.
+*   **Batasan**: Injeksi akan gagal jika `cursor` melebihi `buffer_limit`. Pada Regular Path ini, *memory alignment* yang rumit tidak diperlukan—cukup alokasi memori standar.
 
 #### 3. Purge Corrupted Link (Delete)
-*   **Kemampuan**: Melarutkan thread berdasarkan indeksnya.
-*   **Reklamasi (Tail Reclamation)**: Jika kamu menghapus item *terakhir* di buffer, sistem secara otomatis menggeser `cursor` kembali untuk mengambil ruang tersebut.
-*   **Batasan**: Menghapus item di tengah buffer menciptakan **Fragmentasi**. Ruang tersebut ditandai sebagai "Tidak Aktif" tetapi tidak dapat digunakan untuk injeksi baru sampai semua thread di atasnya dibersihkan.
+*   **Fungsi**: Menghapus *thread* berdasarkan indeksnya.
+*   **Reklamasi (Tail Reclamation)**: Jika kamu menghapus item **terakhir** di dalam *buffer*, sistem akan secara otomatis menggeser `cursor` mundur untuk mereklamasi ruang memori tersebut.
+*   **Batasan**: Jika kamu menghapus item di tengah *buffer*, maka akan terjadi **Fragmentasi**. Ruang tersebut akan ditandai sebagai "Tidak Aktif" dan tidak bisa digunakan untuk injeksi baru sampai semua *thread* di atasnya dihapus (di-purge).
 
 #### 4. Expand Willpower (Resize)
-*   **Kemampuan**: Meningkatkan total batas memori vessel secara manual.
-*   **Pelajaran Utama**: Ini menggunakan alur kerja **New-Copy-Delete**. Kamu harus mengalokasikan buffer baru yang lebih besar, menyalin semua data yang ada dari buffer lama, dan kemudian menghapus buffer lama untuk mencegah kebocoran memori.
-*   **Hasil**: Alamat `Historia.buffer` akan berubah, membuktikan bahwa blok memori fisik yang baru telah diamankan.
+*   **Fungsi**: Meningkatkan total batas memori *vessel* secara manual.
+*   **Core Concept**: Fitur ini menggunakan alur kerja **New-Copy-Delete**. Kamu harus mengalokasikan *buffer* baru yang lebih besar, menyalin seluruh data dari *buffer* lama, dan kemudian menghapus *buffer* lama untuk mencegah *memory leak*.
+*   **Hasil**: *Address* dari `Historia.buffer` akan berubah, membuktikan bahwa blok memori fisik yang baru telah sukses dialokasikan.
 
 ### Memahami `argc` dan `argv`
-Setiap Eksekutif harus memverifikasi otorisasi mereka. Programmu akan mengidentifikasimu melalui **Executive ID** (NIM/ID Mahasiswa).
+Setiap *Executive* wajib memverifikasi otorisasi mereka. Program akan mengidentifikasi kamu melalui **Executive ID** (NIM/ID Mahasiswa).
 - `argc`: Memverifikasi jumlah kunci otorisasi.
 - `argv`: Menangkap ID unikmu.
 
-Jika kamu gagal memberikan format ID yang benar (`F1D02xxxxxx`), sistem akan mengunci aksesmu. CyroN tidak menoleransi akses yang tidak sah.
+Jika kamu memasukkan format ID yang salah (`F1D02xxxxxx`), sistem akan memblokir aksesmu. CyroN tidak menoleransi akses yang tidak sah.
 
 ### Memori Eksekutif: New & Delete
-Manajemen memori tingkat rendah adalah bukti kekuatan tertinggi. Kamu tidak akan menggunakan `malloc` yang kuno. Kamu akan menggunakan operator C++ modern yang efisien:
-*   **`new`**: Memerintah *heap* untuk menyerahkan ruang.
-*   **`delete[]`**: Membersihkan sisa-sisa yang tidak perlu dan mengklaim kembali kekuatan.
+Manajemen memori tingkat rendah (*low-level*) adalah bukti dari keahlian sejati. Kamu tidak perlu menggunakan `malloc` kuno dari bahasa C. Kamu diwajibkan untuk menggunakan *operator* C++ modern yang jauh lebih efisien:
+*   **`new`**: Memerintahkan *heap memory* untuk menyediakan ruang.
+*   **`delete[]`**: Membersihkan sumber daya yang tidak lagi digunakan dan mengembalikan memori kepada sistem.
 
-**Pengingat untuk Keunggulan:**
-*Buffer overflow* adalah tanda dari pikiran yang ceroboh. *Memory leak* adalah pemborosan sumber daya korporasi. Sebagai High Engineer, kodemu harus sempurna seperti hierarki CyroN.
+**Pengingat Penting:**
+*Buffer overflow* adalah pertanda *programmer* yang ceroboh. Sementara itu, *memory leak* adalah bentuk pemborosan aset perusahaan. Sebagai seorang *High Engineer*, kodemu harus rapi dan sesempurna hierarki CyroN.
 
 ### Contoh Input dan Output
 
@@ -105,13 +119,13 @@ CyroN Command: "Subject resistance detected. Overriding feedback."
 ## IV: CLOSING REMARKS
 ### Ketertiban Melalui Kendali
 
-Kamu telah membuktikan nilaimu kepada jaringan. Dengan menguasai manipulasi *pointer* dan alokasi kekuatan dewa mentah, kamu telah memastikan bahwa CyroN tetap menjadi kekuatan dominan di galaksi Andromeda.
+Kamu telah membuktikan kompetensimu kepada jaringan CyroN. Melalui manipulasi *pointer* dan alokasi memori dari kekuatan dewa, kamu telah membantu memastikan bahwa CyroN tetap mendominasi Galaksi Andromeda.
 
-Efisiensi adalah satu-satunya moralitas kita. Kendali adalah satu-satunya harmoni kita.
+Efisiensi adalah satu-satunya pedoman kita. Kontrol absolut adalah satu-satunya jalan menuju harmoni.
 
-Dewan pengawas puas dengan kemajuanmu.
+Dewan Pengawas (*Board of Directors*) sangat puas dengan kinerjamu.
 
-**Kejayaan bagi CyroN.**
+**Jayalah CyroN.**
 
 Salam Hormat,  
 **Dewan Pengawas Cyber Robotic Network (∞)**
