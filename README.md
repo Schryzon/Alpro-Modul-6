@@ -42,8 +42,9 @@ Students must choose one architectural path based on their technical ambition an
 public/
 ├── Regular Path/          # Executive Path: Code & Detailed Docs
 ├── Expert Path/           # Resistance Path: Code & Detailed Docs
-├── Assets/                # Visual dossiers and banners
-└── FULL_LORE.md           # The comprehensive history of Xydos and CyroN
+├── Story/                 # The comprehensive compiled narrative lore (EN & ID)
+├── Additional-Info/       # Supplemental lore files and concepts
+└── Assets/                # Visual dossiers and banners
 ```
 
 ---
@@ -60,7 +61,9 @@ public/
 
 The Andromeda galaxy is failing. As **CyroN** (Cyber Robotic Network) attempts to industrialize the gods, the "Historia Resistance" fights for a future based on free will. Whether you choose to optimize order or restore freedom, your code will decide the fate of the **Koura Sisters**.
 
-For the full architectural history of the galaxy, read the [FULL_LORE.md](FULL_LORE.md).
+For the full architectural history of the galaxy, read the compiled narrative in the [Story Directory](Story/):
+- 📖 [English_STORY.md](Story/English_STORY.md)
+- 📖 [Indonesian_STORY.md](Story/Indonesian_STORY.md)
 
 ---
 
