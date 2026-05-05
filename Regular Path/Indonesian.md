@@ -9,12 +9,12 @@
 
 <br>
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=dytSRzsONNI">
-    <img src="https://img.shields.io/badge/🎧_PUTAR_TEMA_EKSEKUTIF_CYRON-00509E?style=for-the-badge&logo=youtube&logoColor=white" alt="Play BGM">
+  <a href="https://www.youtube.com/watch?v=iH1UUTTUV6I">
+    <img src="https://img.shields.io/badge/MUSIK_EKSEKUTIF_CYRON-00509E?style=for-the-badge&logo=youtube&logoColor=white" alt="Play BGM">
   </a>
   <br><br>
   <a href="../Story/Indonesian_STORY.md">
-    <img src="https://img.shields.io/badge/📖_UNGKAP_CERITA_LENGKAP_XYDOS-5A228B?style=for-the-badge&logo=readme&logoColor=white" alt="Baca Lore">
+    <img src="https://img.shields.io/badge/BACA_CERITA_LENGKAP_XYDOS-5A228B?style=for-the-badge&logo=readme&logoColor=white" alt="Baca Lore">
   </a><br>
   <i>(Sangat disarankan untuk dibaca sebelum mulai mengerjakan!)</i>
 </p>
@@ -35,13 +35,13 @@
 ## I: LOGS
 ### High Executive Memory Engineer — CyroN
 
-Selamat, Warga. Performa kamu dalam simulasi *neural network* sangat memuaskan, dan kamu baru saja dipromosikan. Sekarang, kamu resmi menjabat sebagai **High Executive Engineer** untuk Cyber Robotic Network (CyroN).
+Selamat, wahai teknisi junior. Performa kamu dalam simulasi *neural network* sangat memuaskan, dan kamu baru saja dipromosikan. Sekarang, kamu resmi menjabat sebagai **High Executive Engineer** untuk Cyber Robotic Network (CyroN).
 
-Di Galaksi Andromeda, kekuatan dewa adalah sumber daya yang harus dimaksimalkan. "Koura Sisters" sebelumnya adalah manusia biasa, namun CyroN telah mengubah mereka menjadi wadah (*vessel*) bagi mesin-mesin dewa ini. Sayangnya, kehendak bebas (*free will*) mereka dianggap sebagai sebuah *bug*—sebuah inkonsistensi logika yang menghambat kemajuan galaksi.
+Di Galaksi Andromeda, kekuatan dewa adalah sumber daya yang harus dimaksimalkan. "Koura Sisters" sebelumnya hanyalah android-android biasa, akan tetapi CyroN telah berhasil mengubah mereka menjadi wadah (*vessel*) bagi arsitektur kedewaan ini. Sayangnya, kehendak bebas mereka dianggap sebagai sebuah inkonsistensi logika yang menghambat kemajuan galaksi.
 
-Tugasmu cukup sederhana: Pertahankan *neural buffer* dari Subjek Historia. Redam seluruh fluktuasi kacau dari kesadarannya. Pastikan protokol "Optimalisasi Kedewaan" milik CyroN berjalan absolut tanpa cela.
+Tugasmu cukup sederhana: Pertahankan *neural buffer* dari subjek Historia. Redam seluruh fluktuasi kacau dari kesadarannya. Pastikan protokol "Divine Optimization" milik CyroN berjalan tanpa kendala.
 
-Bekerjalah dengan efisien, karena efisiensi adalah bentuk kesetiaan tertinggi.
+Bekerjalah dengan efisien, karena efisiensi adalah bentuk kesetiaan tertinggi terhadap CyroN.
 
 ---
 
@@ -50,16 +50,16 @@ Bekerjalah dengan efisien, karena efisiensi adalah bentuk kesetiaan tertinggi.
 
 | | |
 | :--- | :--- |
-| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Status:** Vessel Terintegrasi<br>**Xydos:** Lagta (Guntur/Abyss)<br>**Batas Memori:** 128 bytes (Alokasi Awal)<br>**Prioritas:** Alpha |
+| <img src="../Assets/Historia.jpeg" width="200"> | **Nama:** Historia Koura (XMA-02A)<br>**Status:** Vessel Terintegrasi<br>**Xydos:** Lagta (Petir/Abyss)<br>**Batas Memori:** 128 bytes (Alokasi Awal)<br>**Prioritas:** Tinggi |
 
 ---
 
 ## III: THE CHALLENGE
 
-Tugas utamamu adalah mengoperasikan "CyroN Divine Interface" untuk mengatur memori Historia dan memastikan manifestasi Xelisa berjalan lancar.
+Tugas utamamu adalah mengoperasikan "CyroN Divine Interface" (Terminal) untuk mengatur memori Historia dan memastikan manifestasi Xelisa berjalan lancar.
 
 ### PROTOKOL OPERASIONAL (Fitur Program)
-Agar target Dewan Pengawas (*Board of Directors*) tercapai tanpa *error*, ikuti spesifikasi teknis dari setiap fungsi terminal berikut:
+Untuk mencapai target Dewan Pengawas (*Board of Directors*) tanpa *error*, ikuti spesifikasi teknis dari setiap fungsi terminal berikut:
 
 #### 1. View Neural Map (Status)
 *   **Fungsi**: Menampilkan visualisasi *real-time* dari *heap memory* subjek.
@@ -95,23 +95,197 @@ Manajemen memori tingkat rendah (*low-level*) adalah bukti dari keahlian sejati.
 *   **`delete[]`**: Membersihkan sumber daya yang tidak lagi digunakan dan mengembalikan memori kepada sistem.
 
 **Pengingat Penting:**
-*Buffer overflow* adalah pertanda *programmer* yang ceroboh. Sementara itu, *memory leak* adalah bentuk pemborosan aset perusahaan. Sebagai seorang *High Engineer*, kodemu harus rapi dan sesempurna hierarki CyroN.
+*Buffer overflow* adalah pertanda *programmer* yang ceroboh. Sementara itu, *memory leak* adalah bentuk pemborosan aset perusahaan. Sebagai seorang *High Executive Engineer*, kodemu harus rapi dan sesempurna CyroN.
 
 ### Contoh Input dan Output
 
-**[1] Otorisasi Berhasil**
+> **ID Demo yang digunakan:** `F1D02240001` → Frekuensi Operator `#001`
+
+---
+
+#### [A] Startup — Tanpa Argumen (Error)
 ```bash
-$ ./solution.exe F1D02240001
-Neural Connection Established: #001
-(Memuat Terminal Eksekutif)
+$ ./solution.exe
+Error: Neural Link requires an Operator ID (Student ID).
+Usage: ./solution.exe <Student_ID>
 ```
 
-**[2] Supresi Ilahi (Suntik Threads)**
+#### [B] Startup — Terlalu Banyak Argumen (Error)
+```bash
+$ ./solution.exe F1D02240001 argumen_lebih
+Error: Too many parameters. Connection unstable.
+```
+
+#### [C] Startup — Panjang ID Salah (Error)
+```bash
+$ ./solution.exe F1D0224001
+Error: Operator ID must be exactly 11 characters long.
+```
+
+#### [D] Startup — Prefiks ID Salah (Error)
+```bash
+$ ./solution.exe A1B02240001
+Error: Operator ID must start with 'F1D02'.
+```
+
+#### [E] Startup — ID Valid (Berhasil)
+*(Langsung masuk ke loop utama setelah `init_core()`.)*
+```bash
+$ ./solution.exe F1D02240001
+```
+*(Layar dibersihkan, bisikan Xelisa muncul, lalu menu utama tampil.)*
+
+---
+
+#### [F] Menu Utama (Load Pertama)
+```text
+          CYRON TERMINAL: DIVINE SUPPRESSION
+
+[1;35mXelisa: "Exquisite... the synchronization is perfect."[0m
+------------------------------------------------------------
+1. View Neural Map (Status)
+2. Inject Neural Thread (Add)
+3. Purge Corrupted Link (Delete)
+4. Expand Willpower (Resize)
+0. Surrender (Exit)
+------------------------------------------------------------
+Select Operation:
+```
+> Bisikan Xelisa bersiklus melalui 4 kutipan berbeda, berganti setiap kali menu ditampilkan.
+
+#### [G] Menu Utama — Input Tidak Valid (Non-angka)
+```text
+Select Operation: halo
+(Menu digambar ulang; input tidak valid dilewati secara diam-diam oleh error recovery cin)
+```
+
+---
+
+#### [H] Opsi 1 — View Neural Map (Buffer Kosong)
+```text
+Select Operation: 1
+============================================================
+NEURAL MAP: HISTORIA KOURA [STABILITY: 100%]
+============================================================
+(Buffer is clear. Xelisa is gathering strength...)
+------------------------------------------------------------
+Cursor: 0 / 128 Bytes used.
+------------------------------------------------------------
+>> Press ENTER for next pulse...
+```
+
+#### [H2] Opsi 1 — View Neural Map (Setelah Data Ditambahkan)
+```text
+============================================================
+NEURAL MAP: HISTORIA KOURA [STABILITY: 75%]
+============================================================
+[0] TYPE: Willpower Pulse | OFFSET: 0 | ADDR: 0x... | DATA: "Kepatuhan Mutlak."
+[1] TYPE: Thunder Discharge | OFFSET: 18 | ADDR: 0x... | DATA: 777MW
+------------------------------------------------------------
+Cursor: 22 / 128 Bytes used.
+------------------------------------------------------------
+>> Press ENTER for next pulse...
+```
+> **Stability %** = `100 - (100 * cursor / buffer_limit)`. Dengan 32 byte terpakai dari 128 → `100 - (100*32/128) = 75%`.
+
+---
+
+#### [I] Opsi 2 — Inject Thread: Willpower (Teks) Berhasil
 ```text
 Select Operation: 2
-Select Injection Type: 0 = Willpower (Suppress), 1 = Thunder (Chain): 0
-Enter Willpower Mantra: Kepatuhan Mutlak.
+Select Injection Type: 0 = Willpower (Text), 1 = Thunder (Level): 0
+Enter Willpower Input: Kepatuhan Mutlak.
 CyroN Command: "Subject resistance detected. Overriding feedback."
+>> Press ENTER for next pulse...
+```
+*(Kembali ke loop menu utama.)*
+
+#### [I2] Opsi 2 — Inject Willpower — Buffer Overflow (Error)
+```text
+Select Injection Type: 0 = Willpower (Text), 1 = Thunder (Level): 0
+Enter Willpower Input: [String yang terlalu panjang untuk buffer]
+!! OPTIMIZATION ERROR !! The vessel's ego rejected the thread!
+>> Press ENTER for next pulse...
+```
+*(Kembali ke menu utama tanpa mengubah buffer.)*
+
+#### [I3] Opsi 2 — Inject Thunder (int) Berhasil
+```text
+Select Operation: 2
+Select Injection Type: 0 = Willpower (Text), 1 = Thunder (Level): 1
+Enter Thunder Level (int): 777
+Daiki: "(Silence. The wind has been harnessed.)"
+>> Press ENTER for next pulse...
+```
+
+#### [I4] Opsi 2 — Inject Thunder — Buffer Overflow (Error)
+```text
+Select Injection Type: 0 = Willpower (Text), 1 = Thunder (Level): 1
+Enter Thunder Level (int): 9999
+!! OPTIMIZATION ERROR !! Neural burnout detected!
+>> Press ENTER for next pulse...
+```
+*(Kembali ke menu utama tanpa mengubah buffer.)*
+
+---
+
+#### [J] Opsi 3 — Purge Corrupted Link (Hapus)
+
+#### [J1] Hapus Entri Ekor (Ruang Berhasil Direklamasi)
+```text
+Select Operation: 3
+Enter Link Index to purge: 1
+Link 1 dissolved into ether.
+Neural Core reclaimed space. Tail at: 18
+>> Press ENTER for next pulse...
+```
+
+#### [J2] Hapus Entri Tengah (Fragmentasi)
+```text
+Select Operation: 3
+Enter Link Index to purge: 0
+Link 0 dissolved into ether.
+Fragmentation detected. Cannot reclaim space yet!
+>> Press ENTER for next pulse...
+```
+
+#### [J3] Hapus — Indeks Tidak Valid / Sudah Dihapus (Error)
+```text
+Enter Link Index to purge: 99
+Invalid link or already dissolved.
+>> Press ENTER for next pulse...
+```
+
+---
+
+#### [K] Opsi 4 — Expand Willpower (Resize)
+
+#### [K1] Perbesar ke Ukuran Lebih Besar (Berhasil)
+```text
+Select Operation: 4
+Enter new buffer limit: 512
+CyroN Command: "Stability increased. The vessel is now 100% compliant."
+Allocated Frequency: 0x...
+>> Press ENTER for next pulse...
+```
+> Catatan: Alamat buffer **akan berubah**, membuktikan blok heap baru telah berhasil dialokasikan.
+
+#### [K2] Expand — Ukuran Baru Tidak Lebih Besar (Error)
+```text
+Enter new buffer limit: 64
+Expansion must be larger than current limit!
+>> Press ENTER for next pulse...
+```
+*(Kembali ke menu utama tanpa mengubah buffer.)*
+
+---
+
+#### [L] Opsi 0 — Surrender (Keluar)
+```text
+Select Operation: 0
+Reality destabilizes...
+>> Press ENTER for next pulse...
+Connection terminated. Good bye, Operator 001.
 ```
 
 ---
@@ -119,7 +293,7 @@ CyroN Command: "Subject resistance detected. Overriding feedback."
 ## IV: CLOSING REMARKS
 ### Ketertiban Melalui Kendali
 
-Kamu telah membuktikan kompetensimu kepada jaringan CyroN. Melalui manipulasi *pointer* dan alokasi memori dari kekuatan dewa, kamu telah membantu memastikan bahwa CyroN tetap mendominasi Galaksi Andromeda.
+Kamu telah membuktikan kompetensimu kepada CyroN. Melalui manipulasi *pointer* dan alokasi memori dari kekuatan subjek Historia, kamu telah membantu memastikan bahwa CyroN tetap mendominasi Galaksi Andromeda.
 
 Efisiensi adalah satu-satunya pedoman kita. Kontrol absolut adalah satu-satunya jalan menuju harmoni.
 
@@ -128,4 +302,4 @@ Dewan Pengawas (*Board of Directors*) sangat puas dengan kinerjamu.
 **Jayalah CyroN.**
 
 Salam Hormat,  
-**Dewan Pengawas Cyber Robotic Network (∞)**
+**Dewan Pengawas Cyber Robotic Network**
