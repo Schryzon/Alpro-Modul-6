@@ -3,15 +3,15 @@
 
 ### Program Description
 
-This program is a text-based terminal implementation called the **Schryza Recovery Terminal** [RECOVERY PROTOCOL: PHOENIX], serving as a multi-pool memory management system for three characters: Historia, Mira, and Victoria Koura. Each character owns a separate memory pool managed using C standard library functions — `malloc()`, `realloc()`, and `free()` — from `<cstdlib>`.
+This program is a text-based terminal implementation called the **Schryza Recovery Terminal** [RECOVERY PROTOCOL: PHOENIX], serving as a multi-pool memory management system for three characters: Historia, Mira, and Victoria Koura. Each character owns a separate memory pool managed using C standard library functions — `malloc()`, `memcpy()`, and `free()` — from `<cstdlib>` and `<cstring>`.
 
-The program accepts a single Student ID argument via `argv[1]` in the format `F1D02xxxxxx`. The ID is validated, then its last three digits are extracted mathematically to compute a unique **Special Gap** for each character. This gap directly influences memory layout and is represented through a `union Gap` that holds a different field type per character.
+The program accepts a single Student ID argument via `argv[1]` in the format `F1D02xxxxxx`. The ID is validated, then its last three digits are extracted mathematically to compute a unique **Special Gap** for each character. This gap directly influences memory layout and is represented through a `struct Gap` that holds a different field per character.
 
 ---
 
 ### Initialization and Seed Data
 
-Once the Student ID is validated, the program initializes three memory pools with `malloc()` at fixed sizes: Historia (1024 bytes), Mira (2048 bytes), Victoria (4096 bytes). Each pool carries distinct alignment requirements and a gap derived from the Student ID. Immediately after initialization, five seed entries are pre-loaded across the three pools as a baseline for demonstration. The program then presents the main menu with eight operations.
+Once the Student ID is validated, the program initializes three memory pools with `malloc()` at fixed sizes: Historia (1024 bytes), Mira (2048 bytes), Victoria (4096 bytes). Each pool carries distinct alignment requirements and a gap derived from the Student ID. Immediately after initialization, four seed entries are pre-loaded across the three pools as a baseline for demonstration. The program then presents the main menu with six operations.
 
 ```text
 ============================================================
@@ -27,9 +27,7 @@ Menu
 3 - Show Victoria's memories
 4 - Add memory to a sister
 5 - Delete memory by index from a sister
-6 - Reallocate a sister's pool size
-7 - Check if sisters' memories are full
-8 - Print sisters' pool diagnostics
+6 - Print sisters' pool diagnostics
 0 - Exit
 ------------------------------------------------------------
 Choose:
@@ -68,17 +66,15 @@ Bump: 52 | Pool Size: 1024 | Align: 16 | Special Gap: +1
 When adding a new entry, the program first computes the aligned offset and appends the gap if the type is `char*`. The data is then copied byte-by-byte into the pool. A character-specific narrative response is displayed after the allocation confirms the alignment contract.
 
 ```text
-Choose: 4
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
-Enter string (max 511): Wings of hope.
+Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
+Enter string (max 511): Resistance lives!
 
-Mira smiles: "The resistance welcomes you. 8-bytes for peace, and a 14-byte breeze for hope."
-Xelvelt: "The light of resistance inhale a zero at the end."
-Added string to Mira
+Historia speaks: "Discipline. Align me to 16, and leave a 1-byte tithe."
+Added string to Historia
 [OK] Press ENTER to continue...
 ```
-*Figure 6.3 — Adding a char\* entry to Mira, illustrating the gap and null terminator in the narrative response*
+*Figure 6.4 — Interactive entry addition: selecting Historia core and allocating a char* with 16-byte alignment and parity gap*
 
 If the pool does not have sufficient space to accommodate the new data after alignment and gap are applied, the operation is aborted and a failure message is displayed without modifying the pool state.
 
@@ -119,41 +115,24 @@ Fragmentation prevents reclaim. Delete higher indices first!
 
 ---
 
-### Feature 6: Pool Reallocation
-
-A sister's pool can be resized at runtime using `realloc()`. If the pool is shrunk below the end offset of existing entries, the program emits a per-entry out-of-bounds warning to alert the operator of data that is now beyond the new pool boundary.
-
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 30
-Historia pool resized to 30 bytes
-Warning: entry 0 now out of bounds!
-Warning: entry 1 now out of bounds!
-[OK] Press ENTER to continue...
-```
-*Figure 6.7 — Out-of-bounds warning when Historia's pool is shrunk below existing entry offsets*
-
----
-
-### Feature 8: Pool Diagnostics
+### Feature 6: Pool Diagnostics
 
 The Diagnostics menu prints a comprehensive utilization summary for a selected sister. It reports the number of active slots, the total bytes actually occupied by live data, and the pool utilization percentage. Notably, alignment padding and Special Gap bytes consume pool space but are excluded from the "Used Bytes" count — they represent overhead rather than stored data.
 
 ```text
-Choose: 8
+Choose: 6
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
 ------------------------------------------------------------
 Diagnostics for Historia
 ------------------------------------------------------------
-Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
-Entries: 2
-Used Slots: 2 | Used Bytes: 36
-Utilization: 3.515625%
+Pool: 0x... | Size: 1024 | Bump: 33 | Align: 16 + Gap 1
+Entries: 1
+Used Slots: 1 | Used Bytes: 32
+Utilization: 3.125%
 
 [OK] Press ENTER to continue...
 ```
-*Figure 6.8 — Pool diagnostics for Historia: utilization calculated from raw data bytes only, excluding padding overhead*
+*Figure 6.7 — Pool diagnostics for Historia: utilization calculated from raw data bytes only, excluding padding overhead*
 
 ---
 
@@ -169,6 +148,8 @@ Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
 Entries: 2
 Used Slots: 2 | Used Bytes: 36
 Utilization: 3.515625%
+
+...
 
 Lagta: Respect alignment.
 Daiki: Mind the flow.

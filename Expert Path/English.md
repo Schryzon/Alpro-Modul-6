@@ -80,16 +80,11 @@ The Schryza Resistance operates on limited resources. To succeed, you must maste
 *   **Formula**: `Final_Offset = Aligned(Current_Offset) + Special_Gap`.
 
 #### 2. Advanced Tail Reclamation
-*   **The Fact**: Unlike standard `realloc`, our system does not automatically tidy up fragmented memory blocks.
+*   **The Fact**: Our bump-allocator does not automatically tidy up fragmented memory blocks.
 *   **Capability**: If you delete the *highest index* from a core (the "Tail"), the `bump` pointer will shift backward, immediately reclaiming that space.
 *   **Limitation**: If you delete an entry while a higher index still exists, that space becomes *orphaned* (fragmented). You must "Purge from the top down" to properly reclaim the memory.
 
-#### 3. Pool Resizing & Memory Dangers
-*   **Capability**: The terminal can `realloc()` a sister's entire memory pool.
-*   **The Trap**: If you shrink a pool (e.g., from 1024 to 512 bytes) while high-offset entries still exist, those entries become **Out of Bounds**. The terminal will give a warning, and the data beyond the new limit is automatically lost or corrupted.
-*   **Resizing Logic**: The `bump` pointer will be clamped to the new `pool_size` if it was previously larger.
-
-#### 4. Diagnostic Metrics
+#### 3. Diagnostic Metrics
 *   **Utilization %**: Calculated as `(Used_Bytes / Pool_Size) * 100`. Note that alignment gaps and the "Special Gap" count towards memory consumption but do not count as "Used Bytes" (raw data).
 *   **Used Slots**: Tracks how many `Memory_Entry` slots are currently active. Maximum capacity is **128 entries** per person.
 
@@ -98,7 +93,6 @@ When the terminal boots up, you will see that the sisters' cores have been parti
 
 *   **Historia**:
     *   `[0]` Type: `char*` | Value: "Historia: Schryza will be free."
-    *   `[1]` Type: `int` | Value: `333` (Resistance Frequency)
 *   **Mira**:
     *   `[0]` Type: `char*` | Value: "Mira: The winds are changing."
     *   `[1]` Type: `uint` | Value: `101`
@@ -115,12 +109,11 @@ You must validate your ID (format `F1D02xxxxxx`) or the Base's firewall will blo
 ### Memory Alignments & Secret Modulos
 Every byte is precious when using scavenged hardware. You must resolve the "Jump" gaps to minimize the memory footprint of each allocation.
 
-The sisters' cores are constrained by a **Gap Increment** controlled via a `union Gap`! You must extract the parity from your ID to calculate this gap. CyroN used this trick to suppress their divine powers; you will use it to heal them.
+The sisters' cores are constrained by a **Gap Increment** controlled via a `struct Gap`! You must extract the parity from your ID to calculate this gap. CyroN used this trick to suppress their divine powers; you will use it to heal them.
 
 ### Proper Memory Allocation (The Danger Zone)
 When dealing with raw memory in a warzone, a single typo or logic flaw can be fatal.
 *   **`malloc()`**: Claims memory blocks.
-*   **`realloc()`**: Resizes them.
 *   **`free()`**: Returns memory to the system.
 
 **The Rules of Engagement:** Always allocate *exactly* what you need. Buffer overflows can reveal your location to CyroN, and memory leaks will drain the base's resources. Handle pointers with extreme caution!
@@ -134,11 +127,11 @@ This table is your field manual. Study it. Violating any of these rules is treat
 | Category | Item | Notes |
 |:---|:---|:---|
 | **Headers** | `#include <iostream>` | For `std::cout` and `std::cin` only |
-| **Headers** | `#include <cstdlib>` | For `malloc`, `realloc`, `free`, `exit` |
+| **Headers** | `#include <cstdlib>` | For `malloc`, `free`, `exit` |
 | **Headers** | `#include <climits>` | For `INT_MAX`, `INT_MIN`, `UINT_MAX` |
 | **Memory** | `malloc(size)` | Primary allocation — pool init |
-| **Memory** | `realloc(ptr, size)` | Pool resize (Menu 6) |
 | **Memory** | `free(ptr)` | Pool deallocation on exit |
+| **Memory** | `memcpy()` | Allowed for data copying |
 | **Memory** | `exit(1)` | Only on unrecoverable malloc failure |
 | **I/O** | `std::cout << ...` | All terminal output |
 | **I/O** | `std::cin >> ...` | Numeric input |
@@ -148,8 +141,7 @@ This table is your field manual. Study it. Violating any of these rules is treat
 | **Types** | `unsigned char*` | Raw pool buffer type |
 | **Types** | `size_t` | Offset, size, bump pointer values |
 | **Types** | `long long` / `unsigned long long` | Safe intermediary for range-clamped input |
-| **Structures** | `struct` | `Sister`, `Memory_Entry` |
-| **Structures** | `union` | `Gap` — boolean/int/size_t variant per sister |
+| **Structures** | `struct` | `Sister`, `Memory_Entry`, `Gap` |
 | **Structures** | `enum` | `Menu_Option`, `Memory_Type` |
 | **Keywords** | `constexpr` | Compile-time constants |
 | **Keywords** | `static` | Static functions and static globals |
@@ -163,7 +155,7 @@ This table is your field manual. Study it. Violating any of these rules is treat
 | Category | Item | Why It's Banned |
 |:---|:---|:---|
 | **Memory** | `new` / `delete` / `delete[]` | C++ operators — use C `malloc`/`free` instead |
-| **Memory** | `memcpy()` / `memset()` / `memmove()` | Must copy/zero manually with loops |
+| **Memory** | `memset()` / `memmove()` | Must zero manually with loops |
 | **String** | `strlen()` | Must implement manually (no `<cstring>`) |
 | **String** | `strcpy()` / `strcat()` / `strcmp()` | Same as above — manual loops only |
 | **String** | `sprintf()` / `printf()` / `scanf()` | Use `iostream`, not `<cstdio>` |
@@ -178,7 +170,7 @@ This table is your field manual. Study it. Violating any of these rules is treat
 | **Exceptions** | `try` / `catch` / `throw` | No exception handling |
 | **Headers** | `<string>`, `<vector>`, `<algorithm>`, `<map>`, `<set>`, `<cstring>`, `<cstdio>`, `<sstream>` | Any STL/C-string header is off-limits |
 
-> **Summary in one sentence:** You write C code inside C++ — `malloc`/`realloc`/`free` for memory, `iostream` for I/O, and everything else by hand.
+> **Summary in one sentence:** You write C code inside C++ — `malloc`/`free` for memory, `iostream` for I/O, and everything else by hand.
 
 ### Sample Inputs and Outputs
 
@@ -235,9 +227,7 @@ Menu
 3 - Show Victoria's memories
 4 - Add memory to a sister
 5 - Delete memory by index from a sister
-6 - Reallocate a sister's pool size
-7 - Check if sisters' memories are full
-8 - Print sisters' pool diagnostics
+6 - Print sisters' pool diagnostics
 0 - Exit
 ------------------------------------------------------------
 Choose:
@@ -256,8 +246,7 @@ Choose: 1
 Memories of Historia
 ------------------------------------------------------------
 [0] Type: char* | Size: 32 | Offset: 1 | Address: 0x... | Value: "Historia: Schryza will be free."
-[1] Type: int | Size: 4 | Offset: 48 | Address: 0x... | Jump: 15 | Value: 333
-Bump: 52 | Pool Size: 1024 | Align: 16 | Special Gap: +1
+Bump: 33 | Pool Size: 1024 | Align: 16 | Special Gap: +1
 [OK] Press ENTER to continue...
 ```
 > **Jump: 15** = offset 48 − (offset 1 + size 32) = 48 − 33 = 15 alignment padding bytes.
@@ -302,43 +291,18 @@ Input out of range (0 - 2)! Try again:
 #### [K2] Add char* to Historia
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Hello Resistance!
 
 Historia speaks: "Discipline. Align me to 16, and leave a 1-byte tithe."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Historia
 [OK] Press ENTER to continue...
 ```
 
 #### [K3] Add int to Historia
 ```text
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 1
-Enter int value: 999
-
-Historia whispers: "Thank you for finding me. Align me to 16, and use the 1-byte spark to guide the thunder."
-Lagta: "Integers strike back; four bytes of rebellious thunder."
-Added int to Historia
-[OK] Press ENTER to continue...
-```
-
-#### [K4] Add uint to Mira
-```text
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 2
-Enter unsigned int value: 42
-
-Mira smiles: "Gentle winds protect us. 8-bytes for every life we save."
-Daiki: "The seed of freedom sprouts without sign."
-Added uint to Mira
-[OK] Press ENTER to continue...
-```
-
-#### [K5] Add double to Victoria
-```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 2
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 3
+Select type: 0 = char*, 1 = uint, 2 = double: 2
 Enter double value: 3.14
 
 Victoria rasps: "Even in the dark, your math brings a 14-byte flicker of hope."
@@ -350,11 +314,10 @@ Added double to Victoria
 #### [K6] Add char* to Mira (narrative variant)
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Wings of hope.
 
 Mira smiles: "The resistance welcomes you. 8-bytes for peace, and a 14-byte breeze for hope."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Mira
 [OK] Press ENTER to continue...
 ```
@@ -362,11 +325,10 @@ Added string to Mira
 #### [K7] Add char* to Victoria (narrative variant)
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 2
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Fragment of light.
 
 Victoria rasps: "...I do not need your help, rebel. But the Abyss... it pays a 14-byte tithe to your kindness."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Victoria
 [OK] Press ENTER to continue...
 ```
@@ -431,90 +393,21 @@ Entry already deleted!
 
 ---
 
-#### [M] Menu 6 — Reallocate Pool
-
-#### [M1] Resize to Larger Pool (Success)
+#### [O] Menu 6 — Pool Diagnostics
 ```text
 Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 2048
-Historia pool resized to 2048 bytes
-[OK] Press ENTER to continue...
-```
-
-#### [M2] Resize to Smaller Pool — Data Safe (No Out-of-Bounds)
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 512
-Historia pool resized to 512 bytes
-[OK] Press ENTER to continue...
-```
-
-#### [M3] Resize to Smaller Pool — Out-of-Bounds Warning
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 30
-Historia pool resized to 30 bytes
-Warning: entry 0 now out of bounds!
-Warning: entry 1 now out of bounds!
-[OK] Press ENTER to continue...
-```
-
-#### [M4] Resize to Zero (Error)
-```text
-Enter new pool size (bytes): 0
-Pool size cannot be zero!
-[FAIL] Press ENTER to continue...
-```
-
-#### [M5] Resize — realloc Failure (Out of System Memory)
-```text
-Enter new pool size (bytes): 99999999999
-realloc failed for Historia
-[FAIL] Press ENTER to continue...
-```
-
----
-
-#### [N] Menu 7 — Check If Sisters Are Full
-```text
-Choose: 7
-------------------------------------------------------------
-Historia is NOT FULL | Bump: 52/1024
-------------------------------------------------------------
-------------------------------------------------------------
-Mira is NOT FULL | Bump: 52/2048
-------------------------------------------------------------
-------------------------------------------------------------
-Victoria is NOT FULL | Bump: 53/4096
-------------------------------------------------------------
-[OK] Press ENTER to continue...
-```
-
-#### [N2] After Historia's Pool Is Full (bump >= pool_size)
-```text
-Historia is FULL | Bump: 1024/1024
-```
-
----
-
-#### [O] Menu 8 — Pool Diagnostics
-```text
-Choose: 8
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
 ------------------------------------------------------------
 Diagnostics for Historia
 ------------------------------------------------------------
-Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
-Entries: 2
-Used Slots: 2 | Used Bytes: 36
-Utilization: 3.515625%
+Pool: 0x... | Size: 1024 | Bump: 33 | Align: 16 + Gap 1
+Entries: 1
+Used Slots: 1 | Used Bytes: 32
+Utilization: 3.125%
 
 [OK] Press ENTER to continue...
 ```
-> Used Bytes = 32 (char*) + 4 (int) = **36**. Gap bytes and padding are **not** counted in Used Bytes.
+> Used Bytes = 32 (char*) = **32**. Gap bytes and padding are **not** counted in Used Bytes.
 
 #### [O2] Diagnostics for Mira
 ```text
@@ -546,7 +439,7 @@ Utilization: 0.952148%
 
 #### [P] Unknown Command
 ```text
-Choose: 9
+Choose: 7
 Unknown command!
 [FAIL] Press ENTER to continue...
 ```

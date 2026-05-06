@@ -28,7 +28,7 @@ Mahasiswa harus memilih satu jalur berdasarkan ambisi teknis dan keberpihakan na
 *   **Narasi**: Bergabunglah dengan Perlawanan di Planet Schryza. Pertaruhkan segalanya untuk membebaskan vessel-vessel dewa dari belenggu CyroN.
 *   **Fokus Teknis**:
     - Aritmatika Pointer Tingkat Lanjut.
-    - Manajemen Memori C Standar (`malloc`, `free`, `realloc`).
+    - Manajemen Memori C Standar (`malloc`, `free`).
     - Manajemen multi-pool heap.
     - **Memory Alignment (16/8/4-byte)** dan Kalkulasi Offset Berbasis NIM.
     - Tail Reclamation & Manajemen Cluster.
@@ -100,5 +100,5 @@ Untuk membaca sejarah arsitektur lengkap galaksi ini, baca narasi terkompilasi d
 
 ---
 
-> "Di dunia raw memory, tidak ada jaring pengaman. Hanya pointer-mu yang menentukan realitasmu."  
+> "Dalam memory, tidak ada jaring pengaman. Hanya pointer yang menentukan nasibmu."  
 > — **Jay (∞)**

@@ -97,26 +97,123 @@ Berdasarkan soal di [`Indonesian.md`](Indonesian.md), implementasikan:
 
 ## 4. Cara Mengcompile & Menjalankan Program
 
-Buka **Command Prompt** atau **Terminal**, lalu jalankan perintah berikut:
+> ⚠️ **PERHATIAN: Program ini TIDAK bisa langsung di-F11 atau di-F9 di Dev-C++!**
+> Program ini membutuhkan **argumen NIM** saat dijalankan. Baca panduan di bawah dengan teliti.
 
-### Compile
-```bash
-g++ -o solution NIM_nama.cpp
+---
+
+### 🧠 Kenapa Tidak Bisa Langsung Tekan F11?
+
+Program ini menggunakan `argc` dan `argv` — mekanisme standar C++ untuk menerima input dari **command line sebelum program berjalan**.
+
+```cpp
+int main(int argc, char** argv) {
+    // argc = jumlah argumen (termasuk nama program itu sendiri)
+    // argv[0] = nama file executable, contoh: "solution.exe"
+    // argv[1] = NIM kamu, contoh: "F1D02240001"
+}
 ```
-Contoh:
-```bash
+
+Ketika kamu menekan **F11 di Dev-C++**, program berjalan tanpa argumen apapun (`argc == 1`), sehingga program langsung menampilkan error:
+```text
+Usage: solution.exe <student_id>
+Example: solution.exe F1D02240001
+```
+...lalu keluar. **Ini bukan bug di kodemu.** Ini memang desainnya.
+
+---
+
+### 🖥️ Metode 1: Dev-C++ (dengan Compiler Arguments)
+
+Ini cara yang paling direkomendasikan kalau kamu tetap ingin pakai Dev-C++.
+
+**Langkah-langkah:**
+
+**1.** Buka Dev-C++ dan buka file `.cpp`-mu.
+
+**2.** Klik menu **Execute** → **Parameters...**
+
+```
+Menu Bar → Execute → Parameters...
+```
+
+**3.** Pada kotak **"Parameters"**, ketik NIM kamu:
+```
+F1D02240001
+```
+> Ganti dengan NIM kamu sendiri. Pastikan formatnya benar: `F1D02` diikuti 6 digit angka.
+
+**4.** Klik **OK** untuk menyimpan.
+
+**5.** Sekarang compile dan jalankan seperti biasa dengan **F11**.
+
+Program akan menerima NIM tersebut sebagai `argv[1]` dan berjalan dengan benar.
+
+> ⚠️ **Ingat:** Setiap kali kamu membuka ulang Dev-C++, kamu mungkin perlu mengatur Parameter ini lagi.
+
+---
+
+### 💻 Metode 2: Command Prompt / Terminal (Direkomendasikan)
+
+Cara ini lebih andal dan merupakan cara yang benar untuk program berbasis argumen.
+
+**Windows (Command Prompt):**
+
+**1.** Tekan `Win + R`, ketik `cmd`, lalu Enter.
+
+**2.** Navigasi ke folder tempat file `.cpp`-mu berada:
+```cmd
+cd C:\Users\NamaMu\Documents\Alpro
+```
+
+**3.** Compile program:
+```cmd
+g++ -o solution NIM_NamaLengkap.cpp
+```
+Contoh nyata:
+```cmd
 g++ -o solution F1D02240001_BudiSantoso.cpp
 ```
 
-### Jalankan
+**4.** Jalankan dengan NIM sebagai argumen:
+```cmd
+solution.exe F1D02240001
+```
+atau
+```cmd
+.\solution.exe F1D02240001
+```
+
+**Linux / WSL / Git Bash:**
 ```bash
+g++ -o solution F1D02240001_BudiSantoso.cpp
 ./solution F1D02240001
 ```
-Ganti `F1D02240001` dengan **NIM kamu yang sebenarnya**.
 
-### Kalau muncul error saat compile
-- Pastikan file `.cpp`-mu ada di direktori yang sama dengan tempat kamu menjalankan perintah.
-- Pastikan `g++` sudah ter-install dan bisa diakses dari terminal (ketik `g++ --version` untuk cek).
+---
+
+### ✅ Verifikasi Output Awal
+
+Jika berhasil, program harus menampilkan banner ini diikuti menu utama:
+```text
+============================================================
+CyroN Divine Interface — Neural Management Terminal
+============================================================
+```
+
+---
+
+### ❌ Error Umum dan Solusinya
+
+| Error | Penyebab | Solusi |
+|:------|:---------|:-------|
+| `Usage: solution.exe <student_id>` | Program berjalan tanpa argumen (F11 tanpa parameter) | Atur **Execute → Parameters** di Dev-C++, atau pakai CMD |
+| `Error: Student ID must start with F1D02` | NIM salah format | Pastikan formatnya persis `F1D02xxxxxx` (kapital, 11 karakter) |
+| `Error: Student ID must be exactly 11 characters` | NIM terlalu pendek/panjang | Hitung ulang: `F1D02` + 6 digit = 11 karakter total |
+| `'g++' is not recognized` | Compiler belum ter-install atau belum di PATH | Install [MinGW-w64](https://www.mingw-w64.org/) dan tambahkan ke PATH |
+| Layar hitam langsung tutup | Program crash atau selesai terlalu cepat | Jalankan dari CMD, bukan klik `.exe` langsung |
+
+> 💡 **Tip:** Kalau bingung di mana file `.cpp`-mu tersimpan, di Dev-C++ klik kanan nama file di editor → **"Open Containing Folder"**, lalu jalankan CMD dari folder tersebut dengan Shift+Klik kanan → **"Open PowerShell/Command Prompt here"**.
 
 > 💡 **Contoh output yang diharapkan** bisa kamu lihat di bagian **"Contoh Input dan Output"** di dalam file [`Indonesian.md`](Indonesian.md).
 

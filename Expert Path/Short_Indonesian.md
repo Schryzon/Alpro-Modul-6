@@ -3,17 +3,17 @@
 
 ### Deskripsi Program
 
-Program ini merupakan implementasi terminal berbasis teks bernama **Schryza Recovery Terminal** [RECOVERY PROTOCOL: PHOENIX] yang berperan sebagai sistem manajemen memori multi-pool untuk tiga karakter: Historia, Mira, dan Victoria Koura. Setiap karakter memiliki pool memori terpisah yang dikelola menggunakan fungsi C standar `malloc()`, `realloc()`, dan `free()` dari `<cstdlib>`.
+Program ini merupakan implementasi terminal berbasis teks bernama **Schryza Recovery Terminal** [RECOVERY PROTOCOL: PHOENIX] yang berperan sebagai sistem manajemen memori multi-pool untuk tiga karakter: Historia, Mira, dan Victoria Koura. Setiap karakter memiliki pool memori terpisah yang dikelola menggunakan fungsi C standar `malloc()`, `memcpy()`, dan `free()` dari `<cstdlib>` dan `<cstring>`.
 
-Program menerima satu argumen berupa NIM mahasiswa melalui `argv[1]` dalam format `F1D02xxxxxx`. NIM divalidasi formatnya, lalu tiga digit terakhirnya diekstrak secara matematis untuk menghitung nilai **Special Gap** yang unik bagi masing-masing karakter. Gap ini memengaruhi tata letak memori dan diimplementasikan melalui `union Gap` yang menyimpan representasi berbeda per karakter.
+Program menerima satu argumen berupa NIM mahasiswa melalui `argv[1]` dalam format `F1D02xxxxxx`. NIM divalidasi formatnya, lalu tiga digit terakhirnya diekstrak secara matematis untuk menghitung nilai **Special Gap** yang unik bagi masing-masing karakter. Gap ini memengaruhi tata letak memori dan diimplementasikan melalui `struct Gap` yang menyimpan representasi berbeda per karakter.
 
 ---
 
 ### Inisialisasi dan Data Awal
 
-Setelah validasi NIM berhasil, program menginisialisasi tiga pool memori dengan `malloc()` menggunakan ukuran yang telah ditetapkan: Historia (1024 byte), Mira (2048 byte), Victoria (4096 byte). Setiap pool memiliki *alignment requirement* yang berbeda serta gap yang dihitung dari NIM. Segera setelah inisialisasi, program mengisi data awal (*seed data*) pada ketiga pool sebagai fondasi demonstrasi.
+Setelah validasi NIM berhasil, program menginisialisasi tiga pool memori dengan `malloc()` menggunakan ukuran yang telah ditetapkan: Historia (1024 byte), Mira (2048 byte), Victoria (4096 byte). Setiap pool memiliki *alignment requirement* yang berbeda serta gap yang dihitung dari NIM. Segera setelah inisialisasi, program mengisi empat data awal (*seed data*) pada ketiga pool sebagai fondasi demonstrasi.
 
-Setelah data awal tersedia, program menampilkan menu utama yang menyediakan delapan operasi.
+Setelah data awal tersedia, program menampilkan menu utama yang menyediakan enam operasi.
 
 ```text
 ============================================================
@@ -29,9 +29,7 @@ Menu
 3 - Show Victoria's memories
 4 - Add memory to a sister
 5 - Delete memory by index from a sister
-6 - Reallocate a sister's pool size
-7 - Check if sisters' memories are full
-8 - Print sisters' pool diagnostics
+6 - Print sisters' pool diagnostics
 0 - Exit
 ------------------------------------------------------------
 Choose:
@@ -70,17 +68,15 @@ Bump: 52 | Pool Size: 1024 | Align: 16 | Special Gap: +1
 Saat menambahkan entri baru, program terlebih dahulu menghitung offset setelah alignment dan menambahkan gap apabila tipenya `char*`. Setelah data disalin byte-per-byte ke pool, narasi karakter ditampilkan sebagai respons kontekstual.
 
 ```text
-Choose: 4
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
-Enter string (max 511): Wings of hope.
+Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
+Enter string (max 511): Resistance lives!
 
-Mira smiles: "The resistance welcomes you. 8-bytes for peace, and a 14-byte breeze for hope."
-Xelvelt: "The light of resistance inhale a zero at the end."
-Added string to Mira
+Historia speaks: "Discipline. Align me to 16, and leave a 1-byte tithe."
+Added string to Historia
 [OK] Press ENTER to continue...
 ```
-*Gambar 6.3 — Penambahan entri char\* ke Mira disertai narasi gap dan null terminator*
+*Gambar 6.4 — Penambahan entri secara interaktif: memilih core Historia dan mengalokasikan char* dengan alignment 16-byte dan parity gap*
 
 Apabila pool tidak memiliki ruang yang cukup untuk menampung data baru setelah alignment dan gap dihitung, operasi dibatalkan dan program menampilkan pesan kegagalan.
 
@@ -121,41 +117,24 @@ Fragmentation prevents reclaim. Delete higher indices first!
 
 ---
 
-### Fitur 6: Realokasi Pool
-
-Pool memori dapat diubah ukurannya menggunakan `realloc()`. Apabila pool diperkecil dan entri yang sudah ada berada di luar batas ukuran baru, program menampilkan peringatan per entri yang terdeteksi *out-of-bounds*.
-
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 30
-Historia pool resized to 30 bytes
-Warning: entry 0 now out of bounds!
-Warning: entry 1 now out of bounds!
-[OK] Press ENTER to continue...
-```
-*Gambar 6.7 — Peringatan out-of-bounds saat pool diperkecil melampaui offset entri yang sudah ada*
-
----
-
-### Fitur 8: Diagnostik Pool
+### Fitur 6: Diagnostik Pool
 
 Menu Diagnostics menampilkan statistik lengkap penggunaan pool: jumlah slot terpakai, total byte yang terisi oleh data aktif, dan persentase utilisasi pool. Perlu diperhatikan bahwa byte alignment padding dan Special Gap tidak dihitung sebagai "Used Bytes" meskipun ikut mengonsumsi ruang pool.
 
 ```text
-Choose: 8
+Choose: 6
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
 ------------------------------------------------------------
 Diagnostics for Historia
 ------------------------------------------------------------
-Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
-Entries: 2
-Used Slots: 2 | Used Bytes: 36
-Utilization: 3.515625%
+Pool: 0x... | Size: 1024 | Bump: 33 | Align: 16 + Gap 1
+Entries: 1
+Used Slots: 1 | Used Bytes: 32
+Utilization: 3.125%
 
 [OK] Press ENTER to continue...
 ```
-*Gambar 6.8 — Output diagnostik Historia: utilisasi pool dengan perhitungan byte data aktif saja*
+*Gambar 6.7 — Output diagnostik Historia: utilisasi pool dengan perhitungan byte data aktif saja*
 
 ---
 
@@ -171,6 +150,8 @@ Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
 Entries: 2
 Used Slots: 2 | Used Bytes: 36
 Utilization: 3.515625%
+
+...
 
 Lagta: Respect alignment.
 Daiki: Mind the flow.

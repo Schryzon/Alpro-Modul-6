@@ -80,16 +80,11 @@ Perlawanan Schryza beroperasi dengan sumber daya terbatas. Untuk berhasil, kamu 
 *   **Rumus**: `Final_Offset = Aligned(Current_Offset) + Special_Gap`.
 
 #### 2. Advanced Tail Reclamation (Reklamasi Ekor)
-*   **Fakta**: Berbeda dengan `realloc` bawaan, sistem kita tidak secara otomatis merapikan blok memori yang terfragmentasi.
+*   **Fakta**: *Bump-allocator* kita tidak secara otomatis merapikan blok memori yang terfragmentasi.
 *   **Kemampuan**: Jika kamu menghapus *indeks tertinggi* dari sebuah core ("Tail"), pointer `bump` akan bergeser mundur untuk langsung mereklamasi ruang memori tersebut.
 *   **Batasan**: Jika kamu menghapus entri namun masih ada indeks di atasnya, ruang itu akan menjadi *orphaned* (terjadi fragmentasi). Kamu wajib melakukan "Purge" dari atas ke bawah supaya memorinya bisa digunakan kembali.
 
-#### 3. Pool Resizing & Bahaya Memori
-*   **Kemampuan**: Terminal bisa melakukan `realloc()` ke seluruh *pool* memori milik salah satu dari mereka.
-*   **Jebakan**: Jika kamu mengecilkan ukuran *pool* (misalnya dari 1024 menjadi 512 byte) sementara masih ada entri di offset tinggi, entri itu akan berstatus **Out of Bounds**. Terminal akan memberikan peringatan, dan data yang ada di luar batas baru itu otomatis hilang atau rusak (*corrupted*).
-*   **Logika Resizing**: Pointer `bump` akan dipangkas (*clamped*) ke `pool_size` yang baru jika ukurannya ternyata lebih besar sebelumnya.
-
-#### 4. Metrik Diagnostik
+#### 3. Metrik Diagnostik
 *   **Utilization %**: Dihitung menggunakan rumus `(Used_Bytes / Pool_Size) * 100`. Ingat, *alignment gap* dan "Special Gap" tetap dihitung sebagai pemakaian memori, namun tidak masuk hitungan "Used Bytes" (data murni).
 *   **Used Slots**: Melacak berapa banyak slot `Memory_Entry` yang sedang aktif. Kapasitas maksimalnya **128 entri** per orang.
 
@@ -98,7 +93,6 @@ Saat terminal dinyalakan, kamu akan melihat bahwa *core* mereka sudah dipulihkan
 
 *   **Historia**:
     *   `[0]` Tipe: `char*` | Nilai: "Historia: Schryza will be free."
-    *   `[1]` Tipe: `int` | Nilai: `333` (Resistance Frequency)
 *   **Mira**:
     *   `[0]` Tipe: `char*` | Nilai: "Mira: The winds are changing."
     *   `[1]` Tipe: `uint` | Nilai: `101`
@@ -115,12 +109,11 @@ Kamu wajib memvalidasi NIM-mu (format `F1D02xxxxxx`) atau *firewall* markas akan
 ### Alignment Memori & Modulo Rahasia
 Setiap *byte* sangat berharga, terutama ketika menggunakan perangkat keras rongsokan. Kamu harus memecahkan mekanisme "Jump" untuk meminimalkan jejak memori dari setiap alokasi.
 
-Core mereka bertiga dibatasi oleh **Gap Increment** yang dikendalikan melalui `union Gap`! Kamu perlu mengekstrak paritas dari NIM-mu untuk menghitung celah ini. CyroN menggunakan taktik ini untuk menekan kekuatan dewa mereka; namun kamu akan memanfaatkannya untuk menyembuhkan *core* mereka.
+Core mereka bertiga dibatasi oleh **Gap Increment** yang dikendalikan melalui `struct Gap`! Kamu perlu mengekstrak paritas dari NIM-mu untuk menghitung celah ini. CyroN menggunakan taktik ini untuk menekan kekuatan dewa mereka; namun kamu akan memanfaatkannya untuk menyembuhkan *core* mereka.
 
 ### Alokasi Memori yang Benar (Zona Berbahaya)
 Saat berurusan dengan *raw memory* di tengah zona perang, satu kesalahan logika saja bisa berakibat fatal.
 *   **`malloc()`**: Memesan blok memori.
-*   **`realloc()`**: Mengubah ukurannya.
 *   **`free()`**: Mengembalikan memori ke sistem.
 
 **Aturan Main:** Selalu alokasikan memori **tepat** sesuai kebutuhan. *Buffer overflow* bisa memberitahu CyroN tentang lokasimu, dan *memory leak* akan menguras sumber daya markas. Berhati-hatilah saat menangani *pointer*!
@@ -134,11 +127,11 @@ Tabel ini adalah panduan lapanganmu. Pelajari baik-baik. Melanggar aturan mana p
 | Kategori | Item | Keterangan |
 |:---|:---|:---|
 | **Header** | `#include <iostream>` | Hanya untuk `std::cout` dan `std::cin` |
-| **Header** | `#include <cstdlib>` | Untuk `malloc`, `realloc`, `free`, `exit` |
+| **Header** | `#include <cstdlib>` | Untuk `malloc`, `free`, `exit` |
 | **Header** | `#include <climits>` | Untuk `INT_MAX`, `INT_MIN`, `UINT_MAX` |
 | **Memori** | `malloc(size)` | Alokasi utama — inisialisasi pool |
-| **Memori** | `realloc(ptr, size)` | Resize pool (Menu 6) |
 | **Memori** | `free(ptr)` | Bebaskan pool saat program selesai |
+| **Memori** | `memcpy()` | Diperbolehkan untuk menyalin data |
 | **Memori** | `exit(1)` | Hanya saat `malloc` gagal secara fatal |
 | **I/O** | `std::cout << ...` | Semua output ke terminal |
 | **I/O** | `std::cin >> ...` | Input numerik |
@@ -148,8 +141,7 @@ Tabel ini adalah panduan lapanganmu. Pelajari baik-baik. Melanggar aturan mana p
 | **Tipe Data** | `unsigned char*` | Tipe buffer pool mentah |
 | **Tipe Data** | `size_t` | Nilai offset, ukuran, dan bump pointer |
 | **Tipe Data** | `long long` / `unsigned long long` | Perantara aman untuk input dengan range-clamp |
-| **Struktur** | `struct` | `Sister`, `Memory_Entry` |
-| **Struktur** | `union` | `Gap` — varian boolean/int/size_t per sister |
+| **Struktur** | `struct` | `Sister`, `Memory_Entry`, `Gap` |
 | **Struktur** | `enum` | `Menu_Option`, `Memory_Type` |
 | **Keyword** | `constexpr` | Konstanta compile-time |
 | **Keyword** | `static` | Fungsi dan variabel global statis |
@@ -163,7 +155,7 @@ Tabel ini adalah panduan lapanganmu. Pelajari baik-baik. Melanggar aturan mana p
 | Kategori | Item | Alasan Dilarang |
 |:---|:---|:---|
 | **Memori** | `new` / `delete` / `delete[]` | Operator C++ — gunakan `malloc`/`free` dari C |
-| **Memori** | `memcpy()` / `memset()` / `memmove()` | Wajib disalin/dinolkan secara manual dengan loop |
+| **Memori** | `memset()` / `memmove()` | Wajib dinolkan secara manual dengan loop |
 | **String** | `strlen()` | Harus diimplementasikan manual (tidak pakai `<cstring>`) |
 | **String** | `strcpy()` / `strcat()` / `strcmp()` | Sama — hanya boleh loop manual |
 | **String** | `sprintf()` / `printf()` / `scanf()` | Gunakan `iostream`, bukan `<cstdio>` |
@@ -178,7 +170,7 @@ Tabel ini adalah panduan lapanganmu. Pelajari baik-baik. Melanggar aturan mana p
 | **Exceptions** | `try` / `catch` / `throw` | Tidak ada exception handling |
 | **Header** | `<string>`, `<vector>`, `<algorithm>`, `<map>`, `<set>`, `<cstring>`, `<cstdio>`, `<sstream>` | Semua header STL/C-string dilarang |
 
-> **Ringkasan satu kalimat:** Kamu menulis kode C di dalam C++ — `malloc`/`realloc`/`free` untuk memori, `iostream` untuk I/O, dan segalanya dikerjakan sendiri.
+> **Ringkasan satu kalimat:** Kamu menulis kode C di dalam C++ — `malloc`/`free` untuk memori, `iostream` untuk I/O, dan segalanya dikerjakan sendiri.
 
 ### Contoh Input dan Output
 
@@ -235,9 +227,7 @@ Menu
 3 - Show Victoria's memories
 4 - Add memory to a sister
 5 - Delete memory by index from a sister
-6 - Reallocate a sister's pool size
-7 - Check if sisters' memories are full
-8 - Print sisters' pool diagnostics
+6 - Print sisters' pool diagnostics
 0 - Exit
 ------------------------------------------------------------
 Choose:
@@ -256,8 +246,7 @@ Choose: 1
 Memories of Historia
 ------------------------------------------------------------
 [0] Type: char* | Size: 32 | Offset: 1 | Address: 0x... | Value: "Historia: Schryza will be free."
-[1] Type: int | Size: 4 | Offset: 48 | Address: 0x... | Jump: 15 | Value: 333
-Bump: 52 | Pool Size: 1024 | Align: 16 | Special Gap: +1
+Bump: 33 | Pool Size: 1024 | Align: 16 | Special Gap: +1
 [OK] Press ENTER to continue...
 ```
 > **Jump: 15** = offset 48 − (offset 1 + size 32) = 48 − 33 = 15 byte padding alignment.
@@ -302,43 +291,18 @@ Input out of range (0 - 2)! Try again:
 #### [K2] Tambah char* ke Historia
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Halo Resistansi!
 
 Historia speaks: "Discipline. Align me to 16, and leave a 1-byte tithe."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Historia
 [OK] Press ENTER to continue...
 ```
 
 #### [K3] Tambah int ke Historia
 ```text
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 1
-Enter int value: 999
-
-Historia whispers: "Thank you for finding me. Align me to 16, and use the 1-byte spark to guide the thunder."
-Lagta: "Integers strike back; four bytes of rebellious thunder."
-Added int to Historia
-[OK] Press ENTER to continue...
-```
-
-#### [K4] Tambah uint ke Mira
-```text
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 2
-Enter unsigned int value: 42
-
-Mira smiles: "Gentle winds protect us. 8-bytes for every life we save."
-Daiki: "The seed of freedom sprouts without sign."
-Added uint to Mira
-[OK] Press ENTER to continue...
-```
-
-#### [K5] Tambah double ke Victoria
-```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 2
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 3
+Select type: 0 = char*, 1 = uint, 2 = double: 2
 Enter double value: 3.14
 
 Victoria rasps: "Even in the dark, your math brings a 14-byte flicker of hope."
@@ -350,11 +314,10 @@ Added double to Victoria
 #### [K6] Tambah char* ke Mira (varian narasi)
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 1
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Sayap harapan.
 
 Mira smiles: "The resistance welcomes you. 8-bytes for peace, and a 14-byte breeze for hope."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Mira
 [OK] Press ENTER to continue...
 ```
@@ -362,11 +325,10 @@ Added string to Mira
 #### [K7] Tambah char* ke Victoria (varian narasi)
 ```text
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 2
-Select type: 0 = char*, 1 = int, 2 = uint, 3 = double: 0
+Select type: 0 = char*, 1 = uint, 2 = double: 0
 Enter string (max 511): Fragmen cahaya.
 
 Victoria rasps: "...I do not need your help, rebel. But the Abyss... it pays a 14-byte tithe to your kindness."
-Xelvelt: "The light of resistance inhale a zero at the end."
 Added string to Victoria
 [OK] Press ENTER to continue...
 ```
@@ -431,90 +393,21 @@ Entry already deleted!
 
 ---
 
-#### [M] Menu 6 — Realokasi Pool
-
-#### [M1] Perbesar Pool (Berhasil)
+#### [O] Menu 6 — Diagnostik Pool
 ```text
 Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 2048
-Historia pool resized to 2048 bytes
-[OK] Press ENTER to continue...
-```
-
-#### [M2] Perkecil Pool — Data Aman (Tidak Ada Out-of-Bounds)
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 512
-Historia pool resized to 512 bytes
-[OK] Press ENTER to continue...
-```
-
-#### [M3] Perkecil Pool — Peringatan Out-of-Bounds
-```text
-Choose: 6
-Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
-Enter new pool size (bytes): 30
-Historia pool resized to 30 bytes
-Warning: entry 0 now out of bounds!
-Warning: entry 1 now out of bounds!
-[OK] Press ENTER to continue...
-```
-
-#### [M4] Resize ke Nol (Error)
-```text
-Enter new pool size (bytes): 0
-Pool size cannot be zero!
-[FAIL] Press ENTER to continue...
-```
-
-#### [M5] Resize — realloc Gagal (Memori Sistem Habis)
-```text
-Enter new pool size (bytes): 99999999999
-realloc failed for Historia
-[FAIL] Press ENTER to continue...
-```
-
----
-
-#### [N] Menu 7 — Cek Apakah Sisters Penuh
-```text
-Choose: 7
-------------------------------------------------------------
-Historia is NOT FULL | Bump: 52/1024
-------------------------------------------------------------
-------------------------------------------------------------
-Mira is NOT FULL | Bump: 52/2048
-------------------------------------------------------------
-------------------------------------------------------------
-Victoria is NOT FULL | Bump: 53/4096
-------------------------------------------------------------
-[OK] Press ENTER to continue...
-```
-
-#### [N2] Setelah Pool Historia Penuh (bump >= pool_size)
-```text
-Historia is FULL | Bump: 1024/1024
-```
-
----
-
-#### [O] Menu 8 — Diagnostik Pool
-```text
-Choose: 8
 Choose sister: 0 = Historia, 1 = Mira, 2 = Victoria: 0
 ------------------------------------------------------------
 Diagnostics for Historia
 ------------------------------------------------------------
-Pool: 0x... | Size: 1024 | Bump: 52 | Align: 16 + Gap 1
-Entries: 2
-Used Slots: 2 | Used Bytes: 36
-Utilization: 3.515625%
+Pool: 0x... | Size: 1024 | Bump: 33 | Align: 16 + Gap 1
+Entries: 1
+Used Slots: 1 | Used Bytes: 32
+Utilization: 3.125%
 
 [OK] Press ENTER to continue...
 ```
-> Used Bytes = 32 (char*) + 4 (int) = **36**. Gap byte dan padding **tidak** dihitung sebagai Used Bytes.
+> Used Bytes = 32 (char*) = **32**. Gap byte dan padding **tidak** dihitung sebagai Used Bytes.
 
 #### [O2] Diagnostik Mira
 ```text
@@ -546,7 +439,7 @@ Utilization: 0.952148%
 
 #### [P] Perintah Tidak Dikenal
 ```text
-Choose: 9
+Choose: 7
 Unknown command!
 [FAIL] Press ENTER to continue...
 ```
