@@ -76,8 +76,14 @@ Setelah masuk ke folder jalurmu, soal tersedia dalam dua bahasa:
 | **Regular Path** | [English.md](Regular%20Path/English.md) | [Indonesian.md](Regular%20Path/Indonesian.md) |
 | **Expert Path** | [English.md](Expert%20Path/English.md) | [Indonesian.md](Expert%20Path/Indonesian.md) |
 
-### Langkah 3 — Kerjakan & Kumpulkan
+### Langkah 3 — Baca Panduan Teknis (Technical Guidebooks)
+Jika kamu mengalami kesulitan dalam memahami konsep Pointer, Alignment, atau Dynamic Memory, kamu dapat membaca panduan teknis lengkap yang telah disediakan:
 
+| 🇬🇧 English Version | 🇮🇩 Versi Indonesia |
+| :--- | :--- |
+| [Technical Guidebook (EN)](Guidebooks/guidebook-english.md) | [Panduan Teknis (ID)](Guidebooks/guidebook-indonesian.md) |
+
+### Langkah 4 — Kerjakan & Kumpulkan
 Kumpulkan hasil kerjamu ke **Google Classroom** yang sudah disediakan. Lihat panduan lengkap pengerjaan dan pengumpulan di dalam folder jalurmu masing-masing (file `README.md`).
 
 ---

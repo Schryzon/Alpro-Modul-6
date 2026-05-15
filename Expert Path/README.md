@@ -19,6 +19,14 @@
 
 ---
 
+## 🛠️ Butuh Bantuan Teknis?
+
+Jika kamu kesulitan memahami konsep **Pointer**, **Memory Alignment**, atau **Malloc/Free**, silakan baca panduan teknis lengkap kami:
+- 🇮🇩 [Panduan Teknis (Bahasa Indonesia)](../Guidebooks/guidebook-indonesian.md)
+- 🇬🇧 [Technical Guidebook (English)](../Guidebooks/guidebook-english.md)
+
+---
+
 ## Daftar Isi
 1. [Apa yang Harus Dibuat?](#1-apa-yang-harus-dibuat)
 2. [Cara Membaca Soal di GitHub](#2-cara-membaca-soal-di-github)
